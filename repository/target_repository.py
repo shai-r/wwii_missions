@@ -1,8 +1,6 @@
-from operator import attrgetter
 from returns.maybe import Maybe, Nothing
 from returns.result import Result, Success, Failure
 from sqlalchemy.exc import SQLAlchemyError
-from typing import List
 from config.base import session_factory
 from models import Target
 
