@@ -8,10 +8,10 @@ class TargetType(Base):
     target_type_name = Column(String(255), nullable=False, unique=True)
 
     targets = relationship(
-        "Targets",
+        "Target",
         lazy="joined",
-        back_populates="target_types",
-        cascade='all, delete-orphan'
+        back_populates="target_type",
+        cascade='all, delete-orphan',
     )
 
     def __repr__(self):

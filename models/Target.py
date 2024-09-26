@@ -6,22 +6,13 @@ class Target(Base):
     __tablename__ = "targets"
     target_id = Column(Integer, primary_key=True, autoincrement=True)
     target_industry = Column(String(255), nullable=False)
-    city_id = Column(Integer, ForeignKey("cities.id"), nullable=False)
-    target_type_id = Column(Integer, ForeignKey("TargetTypes.id"), nullable=False)
+    city_id = Column(Integer, ForeignKey("cities.city_id"), nullable=False)
+    target_type_id = Column(Integer, ForeignKey("TargetTypes.target_type_id"), nullable=False)
     target_priority =  Column(Integer)
 
-    country = relationship("Country", back_populates="cities")
-    cities = relationship("City",
-        lazy="joined",
-        back_populates="targets",
-        cascade='all, delete-orphan'
-    )
+    city = relationship("City", back_populates="targets")
 
-    target_types = relationship("TargetType",
-        lazy="joined",
-        back_populates="targets",
-        cascade='all, delete-orphan'
-    )
+    target_type = relationship("TargetType", back_populates="targets")
 
 
     def __repr__(self):

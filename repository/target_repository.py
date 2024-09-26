@@ -1,8 +1,10 @@
 from returns.maybe import Maybe, Nothing
 from returns.result import Result, Success, Failure
+from sqlalchemy import inspect
 from sqlalchemy.exc import SQLAlchemyError
 from config.base import session_factory
 from models import Target
+from typing import Dict
 
 def insert_target(target: Target) -> Result[Target, str]:
     with session_factory() as session:
@@ -23,9 +25,18 @@ def get_target_by_id(t_id: int) -> Maybe[Target]:
     with session_factory() as session:
         return Maybe.from_optional(
             session.query(Target)
-            .filter(Target.id == t_id)
+            .filter(Target.target_id == t_id)
             .first()
         )
+
+def convert_target_to_json(target: Target) -> Dict[str, str]:
+    return {
+        'target_id': target.target_id,
+        'target_priority': target.target_priority,
+        'target_industry': target.target_industry,
+        'target_type': target.target_type_id,
+        'city_id': target.city_id
+    }
 
 def delete_target(t_id: int) -> Result[Target, str]:
     with session_factory() as session:
