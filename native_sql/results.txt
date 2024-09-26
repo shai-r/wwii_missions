@@ -1,0 +1,29 @@
+ממצאים עבור השאילתות והאינדקסים:
+Query 1:
+- before the index:
+    Planning Time: 0.335 ms
+    Execution Time: 434.340 ms
+- The indexes:
+    idx_mission_date_target_city, idx_air_force
+- after the index:
+    Planning Time: 0.195 ms
+    Execution Time: 21.697 ms
+- Explanation:
+    the composite index on mission date and city accelerated the kibbutz,
+    and the air force index accelerated the calculation of the missions.
+
+Query 2:
+- before the index:
+    Planning Time: 0.233 ms
+    Execution Time: 108.031 ms
+- The indexes:
+    idx_airborne_aircraft, idx_target_country
+- after the index:
+    Planning Time: 0.796 ms
+    Execution Time: 33.063 ms
+- Explanation:
+    The index on the number of planes accelerated the filtering,
+    and the index on the country improved the performance during the kibbutz.
+
+Conclusions:
+    The use of appropriate indexes on key columns improved query performance considerably.
